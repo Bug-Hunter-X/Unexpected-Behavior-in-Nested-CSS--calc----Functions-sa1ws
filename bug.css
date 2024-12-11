@@ -1,0 +1,19 @@
+The following CSS code snippet demonstrates an unusual bug that can occur when using the `calc()` function with percentages and nested calculations: 
+
+```css
+.container {
+  width: 50%;
+}
+
+.inner {
+  width: calc(100% - 20px);
+}
+
+.nested {
+  width: calc( (100% - 10px) / 2 );
+}
+```
+
+In this example, `.container` has a width of 50% of its parent.  `.inner` calculates its width correctly (100% of its parent, minus 20px). However, `.nested`, which attempts to divide the available width by two *after* subtracting 10px, might unexpectedly produce incorrect results in some browsers. The issue often arises from the order of operations within the nested `calc()` function, potentially leading to unexpected rounding errors or inconsistencies.
+
+The problem isn't always immediately apparent and can lead to layout discrepancies that are difficult to debug.
